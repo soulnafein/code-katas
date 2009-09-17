@@ -8,6 +8,11 @@ describe Hand do
     hand.cards.should include(Card.new("9d"))
   end
 
+  it "should recognise high card in an hand" do
+    hand = Hand.new("5h 7c Qc Kc Ad Jc 2d")
+    hand.score.should == Ranking::HIGH_CARD
+  end
+
   it "should recognise pairs in an hand" do
     hand = Hand.new("5h 7c Qc Kc 7d Jc 2d")
     hand.score.should == Ranking::PAIR
@@ -28,14 +33,19 @@ describe Hand do
     hand.score.should == Ranking::STRAIGHT
   end
 
+  it "should recognise a flush in an hand" do
+    hand = Hand.new("5h 7s Qs As 7d 5s 2s")
+    hand.score.should == Ranking::FLUSH
+  end
+
+  it "should recognise a full house in an hand" do
+    hand = Hand.new("5h 7c Qc 7s 7d 5d 2d")
+    hand.score.should == Ranking::FULL_HOUSE
+  end
+
   it "should recognise three of a kind in an hand" do
     hand = Hand.new("5h 7c Qc 7s 7d 7h 2d")
     hand.score.should == Ranking::POKER
-  end
-
-  it "should recognise a full hous in an hand" do
-    hand = Hand.new("5h 7c Qc 7s 7d 5d 2d")
-    hand.score.should == Ranking::FULL_HOUSE
   end
 
 end

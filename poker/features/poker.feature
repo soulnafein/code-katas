@@ -20,6 +20,11 @@ Then I should see
     7s Ts Ks Kd 9d
 """
 
+Scenario: Recognise High Card
+Given I have the following hand "8h 7s Jd As 3s Qh 9s"
+When I ask for the hand value
+Then I should see "High Card"
+
 Scenario: Recognise Pair
 Given I have the following hand "8h 7s 3d 8c 9s Qc Kh"
 When I ask for the hand value
@@ -35,17 +40,22 @@ Given I have the following hand "8h 7s 3d 8c 9s 8s Kh"
 When I ask for the hand value
 Then I should see "Three of a Kind"
 
-Scenario: Recognise Straight
+Scenario: Recognise Straight (A sequence of five cards)
 Given I have the following hand "8h 7s 3d 8c 9s Js Th"
 When I ask for the hand value
 Then I should see "Straight"
 
-Scenario: Recognise Full-House
+Scenario: Recognise Full-House (Three-of-a-kind and Pair)
 Given I have the following hand "8h 7s 8d 8c 9s 7h Kh"
 When I ask for the hand value
 Then I should see "Full-House"
 
-Scenario: Recognise Poker
+Scenario: Recognise Flush (Five cards same suit)
+Given I have the following hand "8h 7s 8s 8c 9s 7s Ks"
+When I ask for the hand value
+Then I should see "Flush"
+
+Scenario: Recognise Poker (4 card of with same face)
 Given I have the following hand "8h 7s 8d 8c 9s 8s Kh"
 When I ask for the hand value
 Then I should see "Poker"
