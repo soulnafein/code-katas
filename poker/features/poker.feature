@@ -40,6 +40,11 @@ Given I have the following hand "8h 7s 3d 8c 9s Js Th"
 When I ask for the hand value
 Then I should see "Straight"
 
+Scenario: Recognise Full-House
+Given I have the following hand "8h 7s 8d 8c 9s 7h Kh"
+When I ask for the hand value
+Then I should see "Full-House"
+
 Scenario: Recognise Poker
 Given I have the following hand "8h 7s 8d 8c 9s 8s Kh"
 When I ask for the hand value

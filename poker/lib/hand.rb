@@ -14,6 +14,7 @@ class Hand
 
   def score
     return Ranking::POKER if contains_poker?
+    return Ranking::FULL_HOUSE if contains_full_house?
     return Ranking::STRAIGHT if contains_straight?
     return Ranking::THREE_OF_A_KIND  if contains_three_of_a_kind?
     return Ranking::TWO_PAIR if contains_two_pairs?
@@ -45,6 +46,10 @@ class Hand
 
     def contains_three_of_a_kind?
       tuples_with_length(3) > 0
+    end
+
+    def contains_full_house?
+      contains_pair? and contains_three_of_a_kind? 
     end
 
     def contains_poker?

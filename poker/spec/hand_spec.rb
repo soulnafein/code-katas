@@ -33,4 +33,9 @@ describe Hand do
     hand.score.should == Ranking::POKER
   end
 
+  it "should recognise a full hous in an hand" do
+    hand = Hand.new("5h 7c Qc 7s 7d 5d 2d")
+    hand.score.should == Ranking::FULL_HOUSE
+  end
+
 end
