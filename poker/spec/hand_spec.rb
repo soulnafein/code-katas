@@ -29,7 +29,12 @@ describe Hand do
   end
 
   it "should recognise a straight in an hand" do
-    hand = Hand.new("Th 7c Qc 8c 7d 9h Jd")
+    hand = Hand.new("Th 7c Qc 8c 10d 9h Jd")
+    hand.score.should == Ranking::STRAIGHT
+  end
+
+  it "should recognise a lower ACE straight" do
+    hand = Hand.new("Ah 2d 3h 4h 5s Jd Qc")
     hand.score.should == Ranking::STRAIGHT
   end
 
@@ -43,9 +48,14 @@ describe Hand do
     hand.score.should == Ranking::FULL_HOUSE
   end
 
-  it "should recognise three of a kind in an hand" do
+  it "should recognise a poker in an hand" do
     hand = Hand.new("5h 7c Qc 7s 7d 7h 2d")
     hand.score.should == Ranking::POKER
+  end
+
+  it "should recognise a straigh flush in an hand" do
+    hand = Hand.new("5h 3d Js 7d 4d 6d 5d")
+    hand.score.should == Ranking::STRAIGHT_FLUSH
   end
 
 end

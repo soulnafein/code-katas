@@ -51,7 +51,7 @@ When I ask for the hand value
 Then I should see "Full-House"
 
 Scenario: Recognise Flush (Five cards same suit)
-Given I have the following hand "8h 7s 8s 8c 9s 7s Ks"
+Given I have the following hand "8h 7s 8s 3c 9s 7s Ks"
 When I ask for the hand value
 Then I should see "Flush"
 
@@ -59,4 +59,9 @@ Scenario: Recognise Poker (4 card of with same face)
 Given I have the following hand "8h 7s 8d 8c 9s 8s Kh"
 When I ask for the hand value
 Then I should see "Poker"
+
+Scenario: Recognise Straight Flush (A straight of same suit)
+Given I have the following hand "8h 7s 8s 3c 9s 6s Ts"
+When I ask for the hand value
+Then I should see "Straight Flush"
 

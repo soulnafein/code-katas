@@ -10,10 +10,10 @@ class Hand
       @cards << Card.new(card)
     end
     @face_frequencies = face_frequencies
-    @suit_frequencies = suit_frequencies
   end
 
   def score
+    return Ranking::STRAIGHT_FLUSH if contains_straight_flush?
     return Ranking::POKER if contains_poker?
     return Ranking::FULL_HOUSE if contains_full_house?
     return Ranking::FLUSH if contains_flush?
@@ -39,19 +39,6 @@ class Hand
       return frequencies
     end
 
-    def suit_frequencies
-      frequencies = Hash.new
-      @cards.each do |card|
-        suit = card.suit
-        if frequencies.include? suit
-          frequencies[suit] += 1
-        else
-          frequencies[suit] = 1
-        end
-      end
-      return frequencies
-    end
-
     def contains_pair?
       tuples_with_length(2) > 0
     end
@@ -65,7 +52,9 @@ class Hand
     end
 
     def contains_flush?
-      @suit_frequencies.values.include? 5
+      Card::SUITS.any? do |suit|
+        cards_by_suit(suit).length >= 5
+      end
     end
 
     def contains_full_house?
@@ -80,24 +69,28 @@ class Hand
       @face_frequencies.values.find_all { |l| l == length }.size 
     end
 
-    FACES = ["1","2","3","4","5","6","7","8","9","T","J","Q","K","A"]
 
-    LENGTH_OF_STRAIGHT = 5
-
-    def contains_straight?
-      (FACES.length-LENGTH_OF_STRAIGHT).downto(0) do |index|
-        return true if contains_straight_starting_at index
+    def contains_straight?(cards=@cards)
+      Card::FACES.keys.each_cons(5).any? do |straight|
+        straight.all? do |face| 
+          face = "A" if face == "1"
+          has_cards_with_same_face(face) and 
+          cards.any? { |card| card.face == face }
+        end
       end
-      return false
     end
 
-    def contains_straight_starting_at(start)
-      contains_straight = true
-      faces = @cards.map { |card| card.face }
-      (start...start+LENGTH_OF_STRAIGHT).each do |index|
-        contains_straight = contains_straight && faces.include?(FACES[index])
-      end
-      return contains_straight
+    def has_cards_with_same_face(face)
+      @face_frequencies[face]
     end
 
+    def contains_straight_flush?
+      Card::SUITS.any? do |suit|
+        contains_straight?(cards_by_suit(suit))
+      end
+    end
+
+    def cards_by_suit(suit)
+      @cards.select { |card| card.suit == suit }
+    end
 end
