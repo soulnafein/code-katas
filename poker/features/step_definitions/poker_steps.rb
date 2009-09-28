@@ -1,4 +1,4 @@
-require_relative '../../lib/hand.rb'
+require 'lib/hand.rb'
 
 Given /^I that I have the following hands:$/ do |table|
   # table is a Cucumber::Ast::Table

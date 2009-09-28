@@ -1,14 +1,11 @@
-require_relative './card.rb'
-require_relative './ranking.rb'
+require 'lib/card.rb'
+require 'lib/ranking.rb'
 
 class Hand
   attr_reader :cards
 
   def initialize(hand_string)
-    @cards = []
-    hand_string.split(" ").each do |card|
-      @cards << Card.new(card)
-    end
+    @cards = hand_string.split(" ").map { |card| Card.new(card) }
     @face_frequencies = face_frequencies
   end
 
@@ -27,15 +24,8 @@ class Hand
   private
 
     def face_frequencies
-      frequencies = Hash.new
-      @cards.each do |card|
-        face = card.face
-        if frequencies.include? face
-          frequencies[face] += 1
-        else
-          frequencies[face] = 1
-        end
-      end
+      frequencies = Hash.new(0) 
+      @cards.each { |card| frequencies[card.face] += 1 }
       return frequencies
     end
 
@@ -51,12 +41,6 @@ class Hand
       tuples_with_length(3) > 0
     end
 
-    def contains_flush?
-      Card::SUITS.any? do |suit|
-        cards_by_suit(suit).length >= 5
-      end
-    end
-
     def contains_full_house?
       contains_pair? and contains_three_of_a_kind? 
     end
@@ -69,19 +53,19 @@ class Hand
       @face_frequencies.values.find_all { |l| l == length }.size 
     end
 
-
-    def contains_straight?(cards=@cards)
-      Card::FACES.keys.each_cons(5).any? do |straight|
-        straight.all? do |face| 
-          face = "A" if face == "1"
-          has_cards_with_same_face(face) and 
-          cards.any? { |card| card.face == face }
-        end
+    def contains_flush?
+      Card::SUITS.any? do |suit|
+        cards_by_suit(suit).length >= 5
       end
     end
 
-    def has_cards_with_same_face(face)
-      @face_frequencies[face]
+    def contains_straight?(cards=@cards)
+      Card::FACES.each_cons(5).any? do |straight|
+        straight.all? do |face|
+          face = "A" if face == "1"
+          cards.any? { |card| card.face == face }
+        end
+      end
     end
 
     def contains_straight_flush?

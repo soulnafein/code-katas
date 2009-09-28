@@ -19,49 +19,20 @@ Then I should see
     4d 2d Ks Kd 9d 3c 6d Flush
     7s Ts Ks Kd 9d
 """
+Scenario Outline: Identifiy poker hand ranking 
+    Given I have the following hand "<hand>" 
+    When I ask for the hand value 
+    Then I should see "<ranking>"
 
-Scenario: Recognise High Card
-Given I have the following hand "8h 7s Jd As 3s Qh 9s"
-When I ask for the hand value
-Then I should see "High Card"
-
-Scenario: Recognise Pair
-Given I have the following hand "8h 7s 3d 8c 9s Qc Kh"
-When I ask for the hand value
-Then I should see "Pair"
-
-Scenario: Recognise Two Pair
-Given I have the following hand "8h 7s 3d 8c 9s 7c Kh"
-When I ask for the hand value
-Then I should see "Two Pair"
-
-Scenario: Recognise Three of a Kind
-Given I have the following hand "8h 7s 3d 8c 9s 8s Kh"
-When I ask for the hand value
-Then I should see "Three of a Kind"
-
-Scenario: Recognise Straight (A sequence of five cards)
-Given I have the following hand "8h 7s 3d 8c 9s Js Th"
-When I ask for the hand value
-Then I should see "Straight"
-
-Scenario: Recognise Full-House (Three-of-a-kind and Pair)
-Given I have the following hand "8h 7s 8d 8c 9s 7h Kh"
-When I ask for the hand value
-Then I should see "Full-House"
-
-Scenario: Recognise Flush (Five cards same suit)
-Given I have the following hand "8h 7s 8s 3c 9s 7s Ks"
-When I ask for the hand value
-Then I should see "Flush"
-
-Scenario: Recognise Poker (4 card of with same face)
-Given I have the following hand "8h 7s 8d 8c 9s 8s Kh"
-When I ask for the hand value
-Then I should see "Poker"
-
-Scenario: Recognise Straight Flush (A straight of same suit)
-Given I have the following hand "8h 7s 8s 3c 9s 6s Ts"
-When I ask for the hand value
-Then I should see "Straight Flush"
+    Examples:
+      |          hand        |      ranking    |
+      | 8h 7s Jd As 3s Qh 9s | High Card       |
+      | 8h 7s 3d 8c 9s Qc Kh | Pair            |
+      | 8h 7s 3d 8c 9s 7c Kh | Two Pair        |
+      | 8h 7s 3d 8c 9s 8s Kh | Three of a Kind |
+      | 8h 7s 3d 8c 9s Js Th | Straight        |
+      | 8h 7s 8d 8c 9s 7h Kh | Full-House      |
+      | 8h 7s 8s 3c 9s 7s Ks | Flush           |
+      | 8h 7s 8d 8c 9s 8s Kh | Poker           |
+      | 8h 7s 8s 3c 9s 6s Ts | Straight Flush  |
 

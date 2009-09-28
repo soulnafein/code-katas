@@ -1,5 +1,5 @@
 require 'spec'
-require_relative '../lib/hand.rb'
+require 'lib/hand.rb'
 
 describe Hand do
   it "should give me a list of cards" do
@@ -53,7 +53,7 @@ describe Hand do
     hand.score.should == Ranking::POKER
   end
 
-  it "should recognise a straigh flush in an hand" do
+  it "should recognise a straight flush in an hand" do
     hand = Hand.new("5h 3d Js 7d 4d 6d 5d")
     hand.score.should == Ranking::STRAIGHT_FLUSH
   end
