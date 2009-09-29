@@ -1,6 +1,3 @@
-require 'lib/card.rb'
-require 'lib/ranking.rb'
-
 class Hand
   attr_reader :cards
 
@@ -10,16 +7,16 @@ class Hand
   end
 
   def rank
-    return Ranking::NOT_RANKED if @cards.length < 7
-    return Ranking::STRAIGHT_FLUSH if contains_straight_flush?
-    return Ranking::POKER if contains_poker?
-    return Ranking::FULL_HOUSE if contains_full_house?
-    return Ranking::FLUSH if contains_flush?
-    return Ranking::STRAIGHT if contains_straight?
-    return Ranking::THREE_OF_A_KIND  if contains_three_of_a_kind?
-    return Ranking::TWO_PAIR if contains_two_pairs?
-    return Ranking::PAIR if contains_pair?
-    return Ranking::HIGH_CARD
+    return Fold.new if @cards.length < 7
+    return StraightFlush.new if contains_straight_flush?
+    return Poker.new if contains_poker?
+    return FullHouse.new if contains_full_house?
+    return Flush.new if contains_flush?
+    return Straight.new if contains_straight?
+    return ThreeOfAKind.new if contains_three_of_a_kind?
+    return TwoPair.new if contains_two_pairs?
+    return Pair.new if contains_pair?
+    return HighCard.new
   end
 
   include Comparable

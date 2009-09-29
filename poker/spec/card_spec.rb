@@ -1,4 +1,4 @@
-require 'lib/card.rb'
+require 'spec/spec_helper.rb'
 
 describe Card do
   it "should be equal to a card with same suit and face" do

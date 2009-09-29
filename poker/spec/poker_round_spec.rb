@@ -1,5 +1,4 @@
-require 'lib/poker_round.rb'
-require 'lib/hand.rb'
+require 'spec/spec_helper.rb'
 
 describe PokerRound do
   it "should tell us the hand with the highest rank" do

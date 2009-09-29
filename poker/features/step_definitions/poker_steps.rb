@@ -1,5 +1,4 @@
-require 'lib/hand.rb'
-require 'lib/poker_round.rb'
+require 'lib/poker_includes.rb'
 
 Given /^I have the following hands:$/ do |table|
   @hands = []
