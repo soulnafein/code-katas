@@ -1,16 +1,20 @@
 require 'lib/hand.rb'
+require 'lib/poker_round.rb'
 
-Given /^I that I have the following hands:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  pending
+Given /^I have the following hands:$/ do |table|
+  @hands = []
+  table.hashes.each do |hash|
+    @hands << Hand.new(hash[:hand])
+  end
 end
 
 When /^I ask for the results$/ do
-  pending
+  poker_round = PokerRound.new(@hands)
+  @results = poker_round.results
 end
 
-Then /^I should see$/ do |string|
-  pending
+Then /^I should see$/ do |expected_results|
+  @results.should == expected_results
 end
 
 Given /^I have the following hand "([^\"]*)"$/ do |hand|
@@ -18,10 +22,10 @@ Given /^I have the following hand "([^\"]*)"$/ do |hand|
 end
 
 When /^I ask for the hand value$/ do
-  @score = @hand.score
+  @rank = @hand.rank
 end
 
-Then /^I should see "([^\"]*)"$/ do |score|
-  @score.to_s.should == score
+Then /^I should see "([^\"]*)"$/ do |rank|
+  @rank.to_s.should == rank
 end
 

@@ -9,7 +9,8 @@ class Hand
     @face_frequencies = face_frequencies
   end
 
-  def score
+  def rank
+    return Ranking::NOT_RANKED if @cards.length < 7
     return Ranking::STRAIGHT_FLUSH if contains_straight_flush?
     return Ranking::POKER if contains_poker?
     return Ranking::FULL_HOUSE if contains_full_house?
@@ -19,6 +20,34 @@ class Hand
     return Ranking::TWO_PAIR if contains_two_pairs?
     return Ranking::PAIR if contains_pair?
     return Ranking::HIGH_CARD
+  end
+
+  include Comparable
+
+  def <=>(other)
+    rank.value <=> other.rank.value
+  end
+
+  def ==(other)
+    if other.instance_of? Hand
+      @cards.all? { |card| other.cards.include? card }
+    elsif
+      false
+    end
+  end
+
+  def hash
+    0
+  end
+
+  def to_s
+    separator = ""
+    result = ""
+    @cards.each do |card|
+      result += separator + card.to_s
+      separator = " "
+    end
+    result
   end
 
   private

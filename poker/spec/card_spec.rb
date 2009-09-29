@@ -9,4 +9,8 @@ describe Card do
     card_1.should == card_2
     card_3.should_not == card_1
   end
+
+  it "should be printable" do
+    Card.new("Kh").to_s.should == "Kh"
+  end
 end
