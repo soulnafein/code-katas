@@ -27,6 +27,12 @@ class Face
     FACES[@value]
   end
 
+  include Comparable
+
+  def <=>(other)
+    @value <=> other.value
+  end
+
   private
     def initialize(value)
       @value = value

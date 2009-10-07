@@ -142,7 +142,7 @@ Then I should see
 
 """
 
-Scenario: The highest high card win
+Scenario: The highest high card wins
 Given I have the following hands:
       |       hand           |
       | Kh 2s Jh Ts 7d 5c 3c |
@@ -155,4 +155,28 @@ Qh 2s 8h Ts 7d 5c 3c High Card
 
 """
 
-Scenario: The 
+Scenario: The highest pair wins
+Given I have the following hands:
+      |       hand           |
+      | 6h 6s 8h Ts 7d 5c 3c |
+      | 5h 5s Jh Ts 7d 2c 3c |
+When I ask for the results
+Then I should see
+"""
+6h 6s 8h Ts 7d 5c 3c Pair (winner)
+5h 5s Jh Ts 7d 2c 3c Pair
+
+"""
+
+Scenario: The highest two pair wins
+Given I have the following hands:
+      |       hand           |
+      | 5h 5s Ah As 7d 2c 3c |
+      | 6h 6s Kh Ks 7d 2c 3c |
+When I ask for the results
+Then I should see
+"""
+5h 5s Ah As 7d 2c 3c Two Pair (winner)
+6h 6s Kh Ks 7d 2c 3c Two Pair
+
+"""

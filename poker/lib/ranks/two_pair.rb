@@ -1,12 +1,13 @@
 class TwoPair < Rank
-  def initialize
+  def initialize(first_pair, second_pair)
+    @first_pair = Pair.new(first_pair)
+    @second_pair = Pair.new(second_pair)
     super("Two Pair")
   end
 
   def self.find_in hand
-    result = []
-    result << TwoPair.new if hand.tuples_with_length(2) > 1
-    result
+    pairs = hand.tuples_with_length(2)
+    TwoPair.new(pairs[0], pairs[1]) if pairs[0] and pairs[1]
   end
 
   def ==(other)
@@ -14,6 +15,6 @@ class TwoPair < Rank
   end
 
   def value
-    3000
+    @first_pair.value+100
   end
 end

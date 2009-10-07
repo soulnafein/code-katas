@@ -6,8 +6,7 @@ class Hand
     @face_frequencies = face_frequencies
   end
 
-  def rank
-    puts @face_frequencies.inspect
+  def rank  
     return Fold.new if Fold.find_in(self).size > 0
 
     ranks = StraightFlush.find_in(self) +
@@ -15,10 +14,11 @@ class Hand
             FullHouse.find_in(self) +
             Flush.find_in(self) +
             Straight.find_in(self) +
-            ThreeOfAKind.find_in(self) +
-            TwoPair.find_in(self) +
-            Pair.find_in(self) <<
-            HighCard.find_in(self)
+            ThreeOfAKind.find_in(self)
+
+    ranks << TwoPair.find_in(self) if TwoPair.find_in(self)
+    ranks << Pair.find_in(self) if Pair.find_in(self)
+    ranks << HighCard.find_in(self)
 
     ranks.sort.last
   end
@@ -51,8 +51,13 @@ class Hand
     result
   end
 
-  def tuples_with_length(length)
+  def number_of_tuples_with_length(length)
     @face_frequencies.values.find_all { |l| l == length }.size 
+  end
+
+  def tuples_with_length(length)
+    unsorted_array = @face_frequencies.find_all { |face, l| l == length }
+    unsorted_array.map { |pair| pair.first }.sort.reverse
   end
 
   def cards_by_suit(suit)

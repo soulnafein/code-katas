@@ -5,7 +5,7 @@ class Poker < Rank
 
   def self.find_in(hand)
     result = []
-    result << Poker.new if hand.tuples_with_length(4) > 0
+    result << Poker.new if hand.number_of_tuples_with_length(4) > 0
     result
   end
 

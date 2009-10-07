@@ -5,7 +5,7 @@ class ThreeOfAKind < Rank
 
   def self.find_in hand
     result = []
-    result << ThreeOfAKind.new if hand.tuples_with_length(3) > 0
+    result << ThreeOfAKind.new if hand.number_of_tuples_with_length(3) > 0
     result
   end
 

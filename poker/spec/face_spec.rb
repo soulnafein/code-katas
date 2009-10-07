@@ -14,4 +14,13 @@ describe Face do
     face_1 = Face.parse("K")       
     face_1.to_s.should == "K"
   end
+  
+   it "should be lower than a face with higher value" do
+    face_1 = Face.parse("K")
+    face_2 = Face.parse("T")
+    face_3 = Face.parse("8")
+
+    face_1.should > face_2
+    face_3.should < face_2
+  end
 end
