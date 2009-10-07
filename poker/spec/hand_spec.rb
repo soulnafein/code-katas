@@ -34,7 +34,7 @@ describe Hand do
 
   it "should recognise high card in an hand" do
     hand = Hand.new("5h 7c Qc Kc Ad Jc 2d")
-    hand.rank.should == HighCard.new
+    hand.rank.instance_of?(HighCard).should == true
   end
 
   it "should recognise pairs in an hand" do

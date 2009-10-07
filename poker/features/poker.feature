@@ -141,3 +141,18 @@ Then I should see
 8h 7s 8s 3c 9s 6s Ts Straight Flush (winner)
 
 """
+
+Scenario: The highest high card win
+Given I have the following hands:
+      |       hand           |
+      | Kh 2s Jh Ts 7d 5c 3c |
+      | Qh 2s 8h Ts 7d 5c 3c |
+When I ask for the results
+Then I should see
+"""
+Kh 2s Jh Ts 7d 5c 3c High Card (winner)
+Qh 2s 8h Ts 7d 5c 3c High Card
+
+"""
+
+Scenario: The 
