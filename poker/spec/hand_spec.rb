@@ -94,5 +94,5 @@ describe Hand do
 
     hand.tuples_with_length(2).should == [Face.parse("7"), Face.parse("5")]
     hand.tuples_with_length(3).should == []
-  end
+  end  
 end

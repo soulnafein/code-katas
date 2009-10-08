@@ -1,7 +1,4 @@
 class Face
-
-
-
   attr_reader :value
 
   def initialize(description, value)
@@ -24,7 +21,7 @@ class Face
   ACE = Face.new("A", 14)
 
   def self.parse(face_string)
-    face = all_faces.select { |face| face.to_s == face_string.capitalize }.first
+    face = all_faces.select { |face| face.to_s == face_string.upcase }.first
     raise UnknownFaceError, "I cannot find a face for #{face_string}" if not face
     face
   end
@@ -33,7 +30,7 @@ class Face
     self.eql?(other)
   end
 
-  def eql?(other)
+  def eql?(other)  
     if other.instance_of? Face
       @value == other.value
     elsif false
@@ -59,11 +56,9 @@ class Face
     faces_including_lower_ace.sort.each_cons(5, &block)
   end
 
-
-  private
-    def self.all_faces
-      Face.constants.map { |face| Face.const_get(face) }.select { |face| face.instance_of? Face }
-    end
+  def self.all_faces
+    Face.constants.map { |face| Face.const_get(face) }.select { |face| face.instance_of? Face }
+  end
 
 end
 
