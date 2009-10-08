@@ -22,8 +22,6 @@ class Card
     @face.to_s + @suit
   end
 
-  FACES = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ]
-
   SUITS = [ "h", "d", "c", "s" ]
 
   include Comparable

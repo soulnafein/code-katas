@@ -28,4 +28,13 @@ describe Face do
   it "should complain if it can't parse a face" do
     lambda {Face.parse("10")}.should raise_error(UnknownFaceError)
   end
+
+  it "should allow me to iterate through all the faces sorted by value" do
+    Face.all_combinations_of_five.all? { |combo| combo.sort == combo }.should == true
+    current = 0
+    Face.all_combinations_of_five.all? do |combo|
+      current += 1
+      combo.first.value == current
+    end.should == true 
+  end
 end

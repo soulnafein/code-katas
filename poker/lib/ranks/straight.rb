@@ -7,10 +7,10 @@ class Straight < Rank
     cards = hand
     cards = hand.cards if hand.respond_to?(:cards)
 
-    has_straight = Card::FACES.each_cons(5).any? do |straight|
+    has_straight = Face.all_combinations_of_five.any? do |straight|
       straight.all? do |face|
-        face = "A" if face == "1"
-        cards.any? { |card| card.face.to_s == face }
+        face = Face::ACE if face.to_s == "1"
+        cards.any? { |card| card.face == face }
       end
     end
 

@@ -1,5 +1,7 @@
 class Face
 
+
+
   attr_reader :value
 
   def initialize(description, value)
@@ -52,10 +54,16 @@ class Face
     @value <=> other.value
   end
 
-  private
-  def self.all_faces
-    Face.constants.map { |face| Face.const_get(face) }.select { |face| face.instance_of? Face }
+  def self.all_combinations_of_five(&block)
+    faces_including_lower_ace = all_faces << Face.new("1",1)
+    faces_including_lower_ace.sort.each_cons(5, &block)
   end
+
+
+  private
+    def self.all_faces
+      Face.constants.map { |face| Face.const_get(face) }.select { |face| face.instance_of? Face }
+    end
 
 end
 
