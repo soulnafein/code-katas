@@ -1,7 +1,6 @@
 require 'lib/card.rb'
 require 'lib/hand.rb'
 require 'lib/poker_round.rb'
-require 'lib/ranking.rb'
 require 'lib/face.rb'
 require 'lib/rank.rb'
 require 'lib/ranks/fold.rb'

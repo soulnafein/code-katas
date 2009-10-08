@@ -4,10 +4,14 @@ describe TwoPair do
   it "should return the two highest pairs" do
     hand = Hand.new("5h Ts Td 5h 3h 3s")
 
-    TwoPair.find_in(hand).should == TwoPair.new(Face.parse("T"), Face.parse("5"))
+    TwoPair.find_in(hand).should == TwoPair.new(Face::TEN, Face::FIVE)
   end
 
-  #it "should be better than a lower high card" do
-  #  HighCard.new(Face.parse("T")).should > HighCard.new(Face.parse("8"))
-  #end
+  it "should be better than a lower high card" do
+    HighCard.new(Face::TEN).should > HighCard.new(Face::EIGHT)
+  end
+
+  it "should be equal to a two pair with same faces" do
+     HighCard.new(Face::TEN).should == HighCard.new(Face::TEN)     
+  end
 end

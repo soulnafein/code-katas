@@ -53,7 +53,7 @@ describe Hand do
   end
 
   it "should recognise a straight in an hand" do
-    hand = Hand.new("Th 7c Qc 8c 10d 9h Jd")
+    hand = Hand.new("Th 7c Qc 8c Td 9h Jd")
     hand.rank.should == Straight.new 
   end
 

@@ -16,11 +16,16 @@ describe Face do
   end
   
    it "should be lower than a face with higher value" do
-    face_1 = Face.parse("K")
-    face_2 = Face.parse("T")
-    face_3 = Face.parse("8")
+    Face::KING.should > Face::TEN
+    Face::EIGHT.should < Face::TEN
+  end
 
-    face_1.should > face_2
-    face_3.should < face_2
+  it "should find a face based on a character" do
+    Face.parse("K").should == Face::KING
+    Face.parse("k").should == Face::KING
+  end
+
+  it "should complain if it can't parse a face" do
+    lambda {Face.parse("10")}.should raise_error(UnknownFaceError)
   end
 end

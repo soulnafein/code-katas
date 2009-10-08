@@ -1,21 +1,40 @@
 class Face
-  def self.parse(face_string)
-    Face.new(FACES.index(face_string))
-  end
 
   attr_reader :value
 
-  FACES = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" ]
+  def initialize(description, value)
+    @description = description
+    @value = value
+  end
+
+  TWO = Face.new("2", 2)
+  THREE = Face.new("3", 3)
+  FOUR = Face.new("4", 4)
+  FIVE = Face.new("5", 5)
+  SIX = Face.new("6", 6)
+  SEVEN = Face.new("7", 7)
+  EIGHT = Face.new("8", 8)
+  NINE = Face.new("9", 9)
+  TEN = Face.new("T", 10)
+  JACK = Face.new("J", 11)
+  QUEEN = Face.new("Q", 12)
+  KING = Face.new("K", 13)
+  ACE = Face.new("A", 14)
+
+  def self.parse(face_string)
+    face = all_faces.select { |face| face.to_s == face_string.capitalize }.first
+    raise UnknownFaceError, "I cannot find a face for #{face_string}" if not face
+    face
+  end
 
   def ==(other)
     self.eql?(other)
   end
 
   def eql?(other)
-     if other.instance_of? Face
-       @value == other.value
-    elsif
-      false
+    if other.instance_of? Face
+      @value == other.value
+    elsif false
     end
   end
 
@@ -24,7 +43,7 @@ class Face
   end
 
   def to_s
-    FACES[@value]
+    @description
   end
 
   include Comparable
@@ -34,8 +53,11 @@ class Face
   end
 
   private
-    def initialize(value)
-      @value = value
-    end
+  def self.all_faces
+    Face.constants.map { |face| Face.const_get(face) }.select { |face| face.instance_of? Face }
+  end
 
+end
+
+class UnknownFaceError < ArgumentError
 end
