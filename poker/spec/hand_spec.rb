@@ -44,12 +44,12 @@ describe Hand do
 
   it "should recognise two pairs in an hand" do
     hand = Hand.new("5h 7c Qc Kc 7d 5c 2d")
-    hand.rank.should == TwoPair.new(Face::SEVEN, Face::FIVE)
+    hand.rank.should == TwoPair.new(Pair.new(Face::SEVEN), Pair.new(Face::FIVE))
   end
 
   it "should recognise three of a kind in an hand" do
     hand = Hand.new("5h 7c Qc Kc 7d 7h 2d")
-    hand.rank.should == ThreeOfAKind.new
+    hand.rank.should == ThreeOfAKind.new(Face::SEVEN)
   end
 
   it "should recognise a straight in an hand" do
@@ -69,12 +69,12 @@ describe Hand do
 
   it "should recognise a full house in an hand" do
     hand = Hand.new("5h 7c Qc 7s 7d 5d 2d")
-    hand.rank.should == FullHouse.new
+    hand.rank.should == FullHouse.new(ThreeOfAKind.new(Face::SEVEN), Pair.new(Face::FIVE))
   end
 
   it "should recognise a poker in an hand" do
     hand = Hand.new("5h 7c Qc 7s 7d 7h 2d")
-    hand.rank.should == Poker.new
+    hand.rank.should == Poker.new(Face::SEVEN)
   end
 
   it "should recognise a straight flush in an hand" do

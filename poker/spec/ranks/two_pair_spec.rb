@@ -1,13 +1,31 @@
 require 'spec/spec_helper.rb'
 
 describe TwoPair do
+  before(:each) do
+    @pair_of_ten = Pair.new(Face::TEN)
+    @pair_of_five = Pair.new(Face::FIVE)
+    @pair_of_two = Pair.new(Face::TWO)
+    @pair_of_nine = Pair.new(Face::NINE)
+    @pair_of_jack = Pair.new(Face::JACK)
+    @pair_of_four = Pair.new(Face::FOUR)
+  end
+
   it "should return the two highest pairs" do
     hand = Hand.new("5h Ts Td 5h 3h 3s")
 
-    TwoPair.find_in(hand).should == TwoPair.new(Face::TEN, Face::FIVE)
+    TwoPair.find_in(hand).should == TwoPair.new(@pair_of_ten, @pair_of_five)
   end
 
   it "should be equal to another two pair with same pairs" do
-    TwoPair.new(Face::TEN, Face::FIVE).should == TwoPair.new(Face::FIVE, Face::TEN)  
+    TwoPair.new(@pair_of_ten, @pair_of_five).should == TwoPair.new(@pair_of_five, @pair_of_ten)
   end
+
+  it "should win on another two pair with same top pair, but lower bottom pair" do
+    TwoPair.new(@pair_of_ten, @pair_of_five).should > TwoPair.new(@pair_of_four, @pair_of_ten)
+  end
+
+  it "should win on another two pair with lower top pair" do
+    TwoPair.new(@pair_of_jack, @pair_of_two).should > TwoPair.new(@pair_of_ten, @pair_of_nine)
+  end
+
 end

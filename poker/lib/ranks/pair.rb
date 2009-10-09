@@ -14,6 +14,13 @@ class Pair < Rank
    end
 
   def value
-    100 + @face.value
+    2
   end
+
+  def tie_breaking(other_pair)
+    @face <=> other_pair.face
+  end
+
+  protected
+    attr_reader :face
 end

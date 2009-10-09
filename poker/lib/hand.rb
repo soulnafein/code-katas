@@ -10,12 +10,12 @@
     return Fold.new if Fold.find_in(self).size > 0
 
     ranks = StraightFlush.find_in(self) +
-            Poker.find_in(self) +
-            FullHouse.find_in(self) +
             Flush.find_in(self) +
-            Straight.find_in(self) +
-            ThreeOfAKind.find_in(self)
+            Straight.find_in(self)
 
+    ranks << FullHouse.find_in(self) if FullHouse.find_in(self)
+    ranks << Poker.find_in(self) if Poker.find_in(self)
+    ranks << ThreeOfAKind.find_in(self) if ThreeOfAKind.find_in(self)
     ranks << TwoPair.find_in(self) if TwoPair.find_in(self)
     ranks << Pair.find_in(self) if Pair.find_in(self)
     ranks << HighCard.find_in(self)

@@ -10,6 +10,13 @@ class Rank
   include Comparable
 
   def <=>(other)
-    value <=> other.value
+    if self.instance_of? other.class
+      tie_breaking(other)
+    else
+      value <=> other.value
+    end       
+  end
+
+  def tie_breaking(other)  
   end
 end
