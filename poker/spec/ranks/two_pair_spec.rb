@@ -7,11 +7,7 @@ describe TwoPair do
     TwoPair.find_in(hand).should == TwoPair.new(Face::TEN, Face::FIVE)
   end
 
-  it "should be better than a lower high card" do
-    HighCard.new(Face::TEN).should > HighCard.new(Face::EIGHT)
-  end
-
-  it "should be equal to a two pair with same faces" do
-     HighCard.new(Face::TEN).should == HighCard.new(Face::TEN)     
+  it "should be equal to another two pair with same pairs" do
+    TwoPair.new(Face::TEN, Face::FIVE).should == TwoPair.new(Face::FIVE, Face::TEN)  
   end
 end

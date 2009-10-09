@@ -3,7 +3,7 @@ class Card
 
   def initialize(card_string)
     @face = Face.parse(card_string[0].chr)  
-    @suit = card_string[1].chr
+    @suit = Suit.parse(card_string[1].chr)
   end
 
   def ==(other)
@@ -19,10 +19,8 @@ class Card
   end
 
   def to_s
-    @face.to_s + @suit
+    @face.to_s + @suit.to_s
   end
-
-  SUITS = [ "h", "d", "c", "s" ]
 
   include Comparable
 

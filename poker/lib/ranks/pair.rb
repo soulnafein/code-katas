@@ -9,9 +9,9 @@ class Pair < Rank
     Pair.new(pairs.first) if not pairs.first.nil?  
   end
 
-  def ==(other)
-    other.instance_of? Pair
-  end
+   def ==(other)
+     value == other.value
+   end
 
   def value
     100 + @face.value

@@ -39,12 +39,12 @@ describe Hand do
 
   it "should recognise pairs in an hand" do
     hand = Hand.new("5h 7c Qc Kc 7d Jc 2d")
-    hand.rank.should == Pair.new(Face.parse("7"))
+    hand.rank.should == Pair.new(Face::SEVEN)
   end
 
   it "should recognise two pairs in an hand" do
     hand = Hand.new("5h 7c Qc Kc 7d 5c 2d")
-    hand.rank.should == TwoPair.new("7", "5")
+    hand.rank.should == TwoPair.new(Face::SEVEN, Face::FIVE)
   end
 
   it "should recognise three of a kind in an hand" do
@@ -92,7 +92,7 @@ describe Hand do
   it "should give me a descendent list of all faces that appear a certain number of times" do
     hand = Hand.new("5h 7c Qc Kc 7d 5c 2d")
 
-    hand.tuples_with_length(2).should == [Face.parse("7"), Face.parse("5")]
+    hand.tuples_with_length(2).should == [Face::SEVEN, Face::FIVE]
     hand.tuples_with_length(3).should == []
   end  
 end

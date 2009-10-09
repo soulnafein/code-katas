@@ -11,10 +11,16 @@ class TwoPair < Rank
   end
 
   def ==(other)
-    other.instance_of? TwoPair
+    (@first_pair.value == other.first_pair.value &&
+    @second_pair.value == other.second_pair.value) ||
+    (@second_pair.value == other.first_pair.value &&
+    @first_pair.value == other.second_pair.value)        
   end
 
   def value
     @first_pair.value+100
   end
+
+  protected
+    attr_reader :first_pair, :second_pair
 end

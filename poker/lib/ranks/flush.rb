@@ -5,7 +5,7 @@ class Flush < Rank
 
   def self.find_in(hand)
     has_flush = Suit.all.any? do |suit|
-      hand.cards_by_suit(suit.to_s.downcase).length >= 5
+      hand.cards_by_suit(suit).length >= 5
     end
     flushes = []
     flushes << Flush.new if has_flush

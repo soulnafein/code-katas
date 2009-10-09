@@ -1,4 +1,4 @@
-class Hand
+ class Hand
   attr_reader :cards
 
   def initialize(hand_string)

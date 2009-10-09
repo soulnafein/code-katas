@@ -3,7 +3,7 @@ require 'spec/spec_helper.rb'
 describe HighCard do
   it "should return the highest card in an hand" do
     hand = Hand.new("Jh Ts Td Kh")
-    HighCard.find_in(hand).should == HighCard.new(Face::TEN)
+    HighCard.find_in(hand).should == HighCard.new(Face::KING)
   end
 
   it "should be better than a lower high card" do
