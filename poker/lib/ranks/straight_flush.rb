@@ -5,7 +5,7 @@ class StraightFlush < Rank
 
   def self.find_in(hand)
     has_straight_flush = Suit.all.any? do |suit|
-      Straight.find_in(hand.cards_by_suit(suit)).size > 0
+      Straight.find_in(hand.cards_by_suit(suit))
     end
 
     result = []

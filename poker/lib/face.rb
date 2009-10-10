@@ -53,7 +53,7 @@ class Face
 
   def self.all_combinations_of_five(&block)
     faces_including_lower_ace = all_faces << Face.new("1",1)
-    faces_including_lower_ace.sort.each_cons(5, &block)
+    faces_including_lower_ace.sort.reverse.each_cons(5, &block)
   end
 
   def self.all_faces

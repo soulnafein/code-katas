@@ -14,7 +14,7 @@ class ThreeOfAKind < Rank
   end
 
   def value
-    4
+    3
   end
 
   protected

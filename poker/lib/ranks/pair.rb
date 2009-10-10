@@ -9,10 +9,6 @@ class Pair < Rank
     Pair.new(pairs.first) if not pairs.first.nil?  
   end
 
-   def ==(other)
-     value == other.value
-   end
-
   def value
     2
   end

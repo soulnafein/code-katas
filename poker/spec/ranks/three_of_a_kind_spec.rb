@@ -8,7 +8,7 @@ describe ThreeOfAKind do
   end
 
   it "should win on another three of a kind with lower face" do
-    ThreeOfAKind.new(Face::TEN) > ThreeOfAKind.new(Face::TWO)
+    ThreeOfAKind.new(Face::TEN).should > ThreeOfAKind.new(Face::TWO)
   end
 
   it "should tie with a three of a kind with same face" do

@@ -9,11 +9,6 @@ class TwoPair < Rank
     TwoPair.new(Pair.new(pairs[0]), Pair.new(pairs[1])) if pairs[0] and pairs[1]
   end
 
-  def ==(other)
-    top_pair == other.top_pair and
-    bottom_pair == other.bottom_pair
-  end
-
   def value
     3  
   end

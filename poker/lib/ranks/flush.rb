@@ -19,5 +19,6 @@ class Flush < Rank
   def value
     5000
   end
+  
 end
 

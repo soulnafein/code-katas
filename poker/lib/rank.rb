@@ -17,6 +17,7 @@ class Rank
     end       
   end
 
-  def tie_breaking(other)  
+  def tie_breaking(other)
+    0
   end
 end

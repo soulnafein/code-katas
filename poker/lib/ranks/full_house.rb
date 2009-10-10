@@ -18,6 +18,15 @@ class FullHouse < Rank
     pair == other.pair
   end
 
+  def tie_breaking(other)
+    three_of_a_kind_comparison = three_of_a_kind <=> other.three_of_a_kind
+    if three_of_a_kind_comparison == 0
+      pair <=> other.pair
+    else
+      three_of_a_kind_comparison
+    end
+  end
+
   def value
     6000
   end

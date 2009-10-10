@@ -4,9 +4,7 @@ class Fold < Rank
   end
 
   def self.find_in(hand)
-    result = []
-    result << Fold.new if hand.cards.length < 7
-    result
+    Fold.new if hand.cards.length < 7
   end
 
   def ==(other)

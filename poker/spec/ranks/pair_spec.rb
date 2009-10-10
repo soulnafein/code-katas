@@ -14,4 +14,5 @@ describe Pair do
   it "should be equal to a pair with the same face" do
     Pair.new(Face::TEN).should == Pair.new(Face::TEN)
   end
+  
 end

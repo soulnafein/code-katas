@@ -9,12 +9,14 @@ describe Hand do
 
   it "should be lower than an hand with a stronger rank" do
     three_of_a_kind = Hand.new("Kh 3d Ts 3h 3s Jh As")
+    a_losing_three_of_a_kind = Hand.new("Kh 2d Ts 2h 2s Jh As")
     pair = Hand.new("Kh 3d Ts 2h 3s Jh As")
     straight = Hand.new("Kh 3d Ts Qh 3s Jh As")
 
     three_of_a_kind.should > pair
     three_of_a_kind.should < straight
     straight.should > pair
+    a_losing_three_of_a_kind.should < three_of_a_kind
   end
 
   it "should be equal to an hand with same cards" do
@@ -54,12 +56,12 @@ describe Hand do
 
   it "should recognise a straight in an hand" do
     hand = Hand.new("Th 7c Qc 8c Td 9h Jd")
-    hand.rank.should == Straight.new 
+    hand.rank.should == Straight.new(Face::QUEEN)
   end
 
   it "should recognise a lower ACE straight" do
     hand = Hand.new("Ah 2d 3h 4h 5s Jd Qc")
-    hand.rank.should == Straight.new
+    hand.rank.should == Straight.new(Face::FIVE)
   end
 
   it "should recognise a flush in an hand" do
