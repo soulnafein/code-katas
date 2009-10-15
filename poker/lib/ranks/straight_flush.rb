@@ -1,16 +1,15 @@
 class StraightFlush < Rank
-  def initialize
+  def initialize(face)
     super("Straight Flush")
+    @face = face
   end
 
   def self.find_in(hand)
-    has_straight_flush = Suit.all.any? do |suit|
-      Straight.find_in(hand.cards_by_suit(suit))
-    end
 
-    result = []
-    result << StraightFlush.new if has_straight_flush
-    result
+    straights = Suit.all.map { |suit| Straight.find_in(hand.cards_by_suit(suit)) }.reject { |straight| straight.nil? }
+    straights.inspect
+ 
+    StraightFlush.new(straights.sort.first) if straights.length > 0
   end
 
   def ==(other)
@@ -20,5 +19,12 @@ class StraightFlush < Rank
   def value
     8000
   end
+
+  def tie_breaking(other)
+    @face <=> other.face
+  end
+
+  protected
+    attr_reader :face
 end
 

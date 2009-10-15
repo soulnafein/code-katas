@@ -21,10 +21,9 @@ class Straight < Rank
     4
   end
 
-  def tie_breaking(other_pair)
-    @face <=> other_pair.face
+  def tie_breaking(other)
+    @face <=> other.face
   end
 
-  protected
-    attr_reader :face
+  attr_reader :face
 end

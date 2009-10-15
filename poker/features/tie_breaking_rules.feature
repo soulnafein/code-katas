@@ -1,4 +1,4 @@
-Feature: Tie breaking rules
+\Feature: Tie breaking rules
 
 Scenario: The highest high card wins
 Given I have the following hands:
@@ -65,6 +65,19 @@ Then I should see
 
 """
 
+Scenario: The highest straight wins
+Given I have the following hands:
+      |       hand           |
+      | 2h 3s 4h 7s 5d 6c 8c |
+      | 6h 5s 2h 3s 4d 5c 3c |
+When I ask for the results
+Then I should see
+"""
+2h 3s 4h 7s 5d 6c 8c Straight (winner)
+6h 5s 2h 3s 4d 5c 3c Straight
+
+"""
+
 Scenario: The full-house with highest three of a kind wins
 Given I have the following hands:
       |       hand           |
@@ -101,5 +114,18 @@ Then I should see
 """
 6h 6s 6d 7s 6d 5c 3c Poker (winner)
 5h 5s Ah 5d 7d 5c 3c Poker
+
+"""
+
+Scenario: The highest straight flush wins
+Given I have the following hands:
+      |       hand           |
+      | 2h 3s 4c 7c 5c 6c 8c |
+      | 6h 5s 2h 3h 4h 5h 3c |
+When I ask for the results
+Then I should see
+"""
+2h 3s 4c 7c 5c 6c 8c Straight Flush (winner)
+6h 5s 2h 3h 4h 5h 3c Straight Flush
 
 """

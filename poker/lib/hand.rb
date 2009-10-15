@@ -9,9 +9,9 @@
   def rank  
     return Fold.new if Fold.find_in(self)
 
-    ranks = StraightFlush.find_in(self) +
-            Flush.find_in(self)
+    ranks = Flush.find_in(self)
 
+    ranks << StraightFlush.find_in(self) if StraightFlush.find_in(self)
     ranks << Straight.find_in(self) if Straight.find_in(self)
     ranks << FullHouse.find_in(self) if FullHouse.find_in(self)
     ranks << Poker.find_in(self) if Poker.find_in(self)

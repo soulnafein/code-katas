@@ -81,7 +81,7 @@ describe Hand do
 
   it "should recognise a straight flush in an hand" do
     hand = Hand.new("5h 3d Js 7d 4d 6d 5d")
-    hand.rank.should == StraightFlush.new
+    hand.rank.should == StraightFlush.new(Face::SEVEN)
   end
 
   it "should give me the number of all the tuples of a certain length" do
