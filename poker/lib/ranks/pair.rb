@@ -25,6 +25,10 @@ class Pair < Rank
     end
   end
 
+  def without_kickers
+    Pair.new(@face)
+  end
+
   protected
   attr_reader :face
   attr_reader :kickers

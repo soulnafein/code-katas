@@ -1,8 +1,8 @@
 class FullHouse < Rank
   def initialize(three_of_a_kind, pair)
     super("Full House")
-    @three_of_a_kind = three_of_a_kind
-    @pair = pair
+    @three_of_a_kind = three_of_a_kind.without_kickers
+    @pair = pair.without_kickers
   end
 
   def self.find_in(hand)

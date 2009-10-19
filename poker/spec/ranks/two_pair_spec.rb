@@ -36,4 +36,8 @@ describe TwoPair do
     losing_two_pair.should < winning_two_pair
   end
 
+  it "should return a Pair without kickers" do
+    Pair.new(Face::TEN, Hand.new("Jh Ad 9h 3d 2s")).without_kickers.should == Pair.new(Face::TEN)
+  end
+
 end
