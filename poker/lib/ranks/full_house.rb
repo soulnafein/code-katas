@@ -28,7 +28,7 @@ class FullHouse < Rank
   end
 
   def value
-    6000
+    6
   end
 
   protected

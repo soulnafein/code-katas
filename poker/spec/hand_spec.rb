@@ -66,7 +66,7 @@ describe Hand do
 
   it "should recognise a flush in an hand" do
     hand = Hand.new("5h 7s Qs As 7d 5s 2s")
-    hand.rank.should == Flush.new
+    hand.rank.should == Flush.new(Hand.new("7s Qs As 5s 2s").cards)
   end
 
   it "should recognise a full house in an hand" do

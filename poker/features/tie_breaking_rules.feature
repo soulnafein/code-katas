@@ -104,6 +104,19 @@ Then I should see
 
 """
 
+Scenario: The flush with the highest card wins
+Given I have the following hands:
+      |       hand           |
+      | 2c Tc 4c Jc 5c 9c 8c |
+      | 9s 7s Js Ts 4s 5s 3s |
+When I ask for the results
+Then I should see
+"""
+2c Tc 4c Jc 5c 9c 8c Flush (winner)
+9s 7s Js Ts 4s 5s 3s Flush
+
+"""
+
 Scenario: The highest poker win
 Given I have the following hands:
       |       hand           |

@@ -14,7 +14,7 @@ class Poker < Rank
   end
 
   def value
-    7000
+    7
   end
 
   protected

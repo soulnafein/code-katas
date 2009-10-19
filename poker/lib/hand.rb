@@ -9,12 +9,12 @@
   def rank  
     return Fold.new if Fold.find_in(self)
 
-    ranks = Flush.find_in(self)
-
+    ranks = []
     ranks << StraightFlush.find_in(self) if StraightFlush.find_in(self)
-    ranks << Straight.find_in(self) if Straight.find_in(self)
-    ranks << FullHouse.find_in(self) if FullHouse.find_in(self)
     ranks << Poker.find_in(self) if Poker.find_in(self)
+    ranks << Flush.find_in(self) if Flush.find_in(self)
+    ranks << FullHouse.find_in(self) if FullHouse.find_in(self)
+    ranks << Straight.find_in(self) if Straight.find_in(self)
     ranks << ThreeOfAKind.find_in(self) if ThreeOfAKind.find_in(self)
     ranks << TwoPair.find_in(self) if TwoPair.find_in(self)
     ranks << Pair.find_in(self) if Pair.find_in(self)
