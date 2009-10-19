@@ -12,25 +12,9 @@ class Flush < Rank
     end
     Flush.new(straight) if has_flush
   end
-
-  def tie_breaking(other)
-    faces = @kickers.map { |card| card.face }
-    other_faces = other.kickers.map { |card| card.face }
-    top_card = (faces - other_faces).sort.last
-    other_top_card = (other_faces - faces).sort.last
-    if top_card && other_top_card
-      top_card <=> other_top_card
-    else
-      0
-    end
-  end
-
+ 
   def value
     5
   end
-
-  protected
-    attr_reader :kickers
-  
 end
 

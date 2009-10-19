@@ -1,8 +1,7 @@
 class TwoPair < Rank
   def initialize(first_pair, second_pair, kickers = [])
     @pairs = [first_pair, second_pair].sort
-    @kickers = kickers
-    super("Two Pair")
+    super("Two Pair", kickers)
   end
 
   def self.find_in hand
@@ -14,43 +13,26 @@ class TwoPair < Rank
   end
 
   def value
-    3  
+    3
   end
 
   protected
-    attr_reader :kickers
-  
-    def bottom_pair
-      @pairs[0]
-    end
+  def bottom_pair
+    @pairs[0]
+  end
 
-    def top_pair
-      @pairs[1]
-    end
+  def top_pair
+    @pairs[1]
+  end
+
   private
-    def tie_breaking(other)
-      top_pair_comparison = top_pair <=> other.top_pair
-      if top_pair_comparison == 0
-        bottom_pair_comparison = bottom_pair <=> other.bottom_pair
-        if bottom_pair_comparison == 0
-          kickers_comparison(other)
-        else
-          bottom_pair_comparison
-        end
-      else
-        top_pair_comparison
-      end
-    end
-
-  def kickers_comparison(other)
-    faces = @kickers.map { |card| card.face }
-    other_faces = other.kickers.map { |card| card.face }
-    top_card = (faces - other_faces).sort.last
-    other_top_card = (other_faces - faces).sort.last
-    if top_card && other_top_card
-      top_card <=> other_top_card
+  def tie_breaking(other)
+    top_pair_comparison = top_pair <=> other.top_pair
+    if top_pair_comparison == 0
+      bottom_pair <=> other.bottom_pair
     else
-      0
+      top_pair_comparison
     end
   end
+
 end

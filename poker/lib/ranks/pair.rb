@@ -1,8 +1,7 @@
 class Pair < Rank
   def initialize(face, kickers = [])
     @face = face
-    @kickers = kickers
-    super("Pair")
+    super("Pair", kickers)
   end
 
   def self.find_in hand
@@ -17,12 +16,7 @@ class Pair < Rank
   end
 
   def tie_breaking(other_pair)
-    face_comparison = @face <=> other_pair.face
-    if face_comparison == 0
-      kickers_comparison(other_pair)
-    else
-      face_comparison
-    end
+    @face <=> other_pair.face
   end
 
   def without_kickers
@@ -31,18 +25,5 @@ class Pair < Rank
 
   protected
   attr_reader :face
-  attr_reader :kickers
 
-  private
-  def kickers_comparison(other)
-    faces = @kickers.map { |card| card.face }
-    other_faces = other.kickers.map { |card| card.face }
-    top_card = (faces - other_faces).sort.last
-    other_top_card = (other_faces - faces).sort.last
-    if top_card && other_top_card
-      top_card <=> other_top_card
-    else
-      0
-    end
-  end
 end
