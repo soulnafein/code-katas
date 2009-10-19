@@ -11,9 +11,9 @@ describe TwoPair do
   end
 
   it "should return the two highest pairs" do
-    hand = Hand.new("5h Ts Td 5h 3h 3s")
+    hand = Hand.new("5h Ts Td 5h 3h 7s 8s")
 
-    TwoPair.find_in(hand).should == TwoPair.new(@pair_of_ten, @pair_of_five)
+    TwoPair.find_in(hand).should == TwoPair.new(@pair_of_ten, @pair_of_five, [Card.new("8s")])
   end
 
   it "should be equal to another two pair with same pairs" do
@@ -26,6 +26,14 @@ describe TwoPair do
 
   it "should win on another two pair with lower top pair" do
     TwoPair.new(@pair_of_jack, @pair_of_two).should > TwoPair.new(@pair_of_ten, @pair_of_nine)
+  end
+
+  it "should compare kickers when comparing with a two pair with same top and bottom pair" do
+    winning_two_pair = TwoPair.new(@pair_of_jack, @pair_of_two, Hand.new("Ah").cards)
+    losing_two_pair = TwoPair.new(@pair_of_jack, @pair_of_two, Hand.new("Kh").cards)
+
+    winning_two_pair.should > losing_two_pair
+    losing_two_pair.should < winning_two_pair
   end
 
 end
