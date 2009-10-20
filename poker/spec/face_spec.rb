@@ -31,10 +31,8 @@ describe Face do
 
   it "should allow me to iterate through all the faces sorted by value" do
     Face.all_combinations_of_five.all? { |combo| combo.sort.reverse == combo }.should == true
-    current = Face::ACE.value+1
-    Face.all_combinations_of_five.all? do |combo|
-      current -= 1
-      combo.first.value == current
-    end.should == true 
+
+    firsts = Face.all_combinations_of_five.map { |combo| combo.first }    
+    firsts.sort.reverse.should == firsts
   end
 end

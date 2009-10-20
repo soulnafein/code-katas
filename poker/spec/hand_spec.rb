@@ -7,6 +7,12 @@ describe Hand do
     hand.cards.should include(Card.new("9d"))
   end
 
+  it "should create a new hand from a list of cards" do
+    hand = Hand.new([Card.new("Kh"), Card.new("Ts")])
+    hand.cards.should include(Card.new("Kh"))
+    hand.cards.should include(Card.new("Ts"))
+  end
+
   it "should be lower than an hand with a stronger rank" do
     three_of_a_kind = Hand.new("Kh 3d Ts 3h 3s Jh As")
     a_losing_three_of_a_kind = Hand.new("Kh 2d Ts 2h 2s Jh As")
@@ -96,5 +102,11 @@ describe Hand do
 
     hand.tuples_with_length(2).should == [Face::SEVEN, Face::FIVE]
     hand.tuples_with_length(3).should == []
-  end  
+  end
+
+  it "should give me a hand with only cards of the specified suit" do
+    hand = Hand.new("5h 7c Qc Kc 7d 5c 2d")
+    hand_of_clubs = hand.hand_by_suit(Suit::CLUBS)
+    hand_of_clubs.should == Hand.new("7c Qc 5c Kc")
+  end
 end

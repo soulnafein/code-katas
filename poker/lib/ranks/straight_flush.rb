@@ -6,7 +6,7 @@ class StraightFlush < Rank
 
   def self.find_in(hand)
 
-    straights = Suit.all.map { |suit| Straight.find_in(hand.cards_by_suit(suit)) }.reject { |straight| straight.nil? }
+    straights = Suit.all.map { |suit| Straight.find_in(hand.hand_by_suit(suit)) }.reject { |straight| straight.nil? }
     straights.inspect
  
     StraightFlush.new(straights.sort.first) if straights.length > 0

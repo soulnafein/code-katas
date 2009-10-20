@@ -1,5 +1,4 @@
 class Face
-  attr_reader :value
 
   def initialize(description, value)
     @description = description
@@ -26,21 +25,6 @@ class Face
     face
   end
 
-  def ==(other)
-    self.eql?(other)
-  end
-
-  def eql?(other)  
-    if other.instance_of? Face
-      @value == other.value
-    elsif false
-    end
-  end
-
-  def hash
-    @value
-  end
-
   def to_s
     @description
   end
@@ -59,6 +43,9 @@ class Face
   def self.all_faces
     Face.constants.map { |face| Face.const_get(face) }.select { |face| face.instance_of? Face }
   end
+
+  protected
+  attr_reader :value
 
 end
 

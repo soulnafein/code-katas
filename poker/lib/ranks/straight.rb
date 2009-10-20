@@ -5,8 +5,7 @@ class Straight < Rank
   end
 
   def self.find_in hand
-    cards = hand
-    cards = hand.cards if hand.respond_to?(:cards)
+    cards = hand.cards
 
     Face.all_combinations_of_five.each do |straight|
       has_straight = straight.all? do |face|

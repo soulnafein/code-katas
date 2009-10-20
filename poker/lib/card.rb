@@ -25,6 +25,6 @@ class Card
   include Comparable
 
   def <=>(other)
-    @face.value <=> other.face.value
+    @face <=> other.face
   end
 end

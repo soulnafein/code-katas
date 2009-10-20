@@ -1,11 +1,15 @@
 class Hand
   attr_reader :cards
 
-  def initialize(hand_string)
-    @cards = hand_string.split(" ").map { |card| Card.new(card) }
+  def initialize(cards)
+    if cards.respond_to?(:split)
+      @cards = cards.split(" ").map { |card| Card.new(card) }
+    else
+      @cards = cards
+    end
     @face_frequencies = face_frequencies
   end
- 
+
   def rank
     return Fold.new if Fold.find_in(self)
 
@@ -49,8 +53,8 @@ class Hand
     unsorted_array.map { |pair| pair.first }.sort.reverse
   end
 
-  def cards_by_suit(suit)
-    @cards.select { |card| card.suit == suit }
+  def hand_by_suit(suit)
+    Hand.new(@cards.select { |card| card.suit == suit })
   end
 
   private
