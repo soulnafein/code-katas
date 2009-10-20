@@ -14,7 +14,7 @@ class Rank
     compare_rank = lambda {value <=> other.value}
     apply_tie_breaking_rules = lambda { tie_breaking(other)}
     compare_kickers = lambda { kickers_comparison(other)}
-    
+
     in_order_to_decide_winner_rank(
             compare_rank,
             apply_tie_breaking_rules,
@@ -34,10 +34,12 @@ class Rank
   end
 
   def kickers_comparison(other)
-    faces = @kickers.map { |card| card.face }
-    other_faces = other.kickers.map { |card| card.face }
-    top_card = (faces - other_faces).sort.last
-    other_top_card = (other_faces - faces).sort.last
+    faces = get_faces(@kickers)
+    other_faces = get_faces(other.kickers)
+     
+    top_card = get_max_unique_face(faces, other_faces)
+    other_top_card = get_max_unique_face(other_faces, faces)
+
     if top_card && other_top_card
       top_card <=> other_top_card
     else
@@ -46,5 +48,14 @@ class Rank
   end
 
   attr_reader :kickers
+
+  private
+  def get_faces(cards)
+    cards.map { |card| card.face }
+  end
+
+  def get_max_unique_face(array1, array2)
+    ((array1 - array2) << Face::TWO).max
+  end
 
 end

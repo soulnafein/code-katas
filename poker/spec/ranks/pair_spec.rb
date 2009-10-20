@@ -4,7 +4,7 @@ describe Pair do
   it "should return the highest pair" do
     hand = Hand.new("5h Ts Td 5s 8s 7d Jh")
 
-    Pair.find_in(hand).should == Pair.new(Face::TEN, Hand.new("5s 8s Jh").cards)
+    Pair.find_in(hand).should == Pair.new(Face::TEN, Hand.new("7d 8s Jh").cards)
   end
 
   it "should be better than a lower pair" do

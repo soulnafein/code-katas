@@ -6,7 +6,7 @@ class ThreeOfAKind < Rank
 
   def self.find_in hand
     three_of_a_kind = hand.tuples_with_length(3).first
-    kickers = [hand.cards.reject { |card| card.face == three_of_a_kind }.sort.reverse.first]
+    kickers = hand.cards.reject { |card| card.face == three_of_a_kind }.sort.reverse[0..1]
     ThreeOfAKind.new(three_of_a_kind, kickers) if not three_of_a_kind.nil?  
   end
 

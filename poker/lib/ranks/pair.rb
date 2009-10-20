@@ -8,7 +8,7 @@ class Pair < Rank
     pair = hand.tuples_with_length(2).first
     kickers = hand.cards.reject { |card| card.face == pair }
 
-    Pair.new(pair, kickers) if not pair.nil?
+    Pair.new(pair, kickers.sort.reverse[0..2]) if not pair.nil?
   end
 
   def value

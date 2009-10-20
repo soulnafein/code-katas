@@ -47,17 +47,17 @@ describe Hand do
 
   it "should recognise pairs in an hand" do
     hand = Hand.new("5h 7c Qc Kc 7d Jc 2d")
-    hand.rank.should == Pair.new(Face::SEVEN)
+    hand.rank.should == Pair.new(Face::SEVEN, Hand.new("Kc Qc Jc").cards)
   end
 
   it "should recognise two pairs in an hand" do
     hand = Hand.new("5h 7c Qc Kc 7d 5c 2d")
-    hand.rank.should == TwoPair.new(Pair.new(Face::SEVEN), Pair.new(Face::FIVE))
+    hand.rank.should == TwoPair.new(Pair.new(Face::SEVEN), Pair.new(Face::FIVE), [Card.new("Kc")])
   end
 
   it "should recognise three of a kind in an hand" do
     hand = Hand.new("5h 7c Qc Kc 7d 7h 2d")
-    hand.rank.should == ThreeOfAKind.new(Face::SEVEN)
+    hand.rank.should == ThreeOfAKind.new(Face::SEVEN, Hand.new("Kc Qc").cards)
   end
 
   it "should recognise a straight in an hand" do
