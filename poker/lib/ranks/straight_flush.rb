@@ -20,11 +20,7 @@ class StraightFlush < Rank
     8
   end
 
-  def tie_breaking(other)
-    @face <=> other.face
-  end
-
-  protected
-    attr_reader :face
+  include FaceTieBreaking
+    
 end
 

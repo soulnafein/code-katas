@@ -13,10 +13,5 @@ class HighCard < Rank
     1  
   end
 
-  def tie_breaking(other_high_card)
-    @face <=> other_high_card.face
-  end
-
-  protected
-    attr_reader :face
+  include FaceTieBreaking
 end

@@ -9,14 +9,9 @@ class Poker < Rank
     Poker.new(poker.first) if not poker.first.nil?
   end
 
-  def tie_breaking(other)
-    @face <=> other.face
-  end
-
+  include FaceTieBreaking
+  
   def value
     7
   end
-
-  protected
-    attr_reader :face
 end

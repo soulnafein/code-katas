@@ -15,12 +15,8 @@ class Straight < Rank
     4
   end
 
-  def tie_breaking(other)
-    @face <=> other.face
-  end
-
-  attr_reader :face
-
+  include FaceTieBreaking
+  
   private
   def self.all_possible_straights(&block)
     all_faces_with_lower_ace = Face.all_faces << Face::ACE

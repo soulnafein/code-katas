@@ -15,15 +15,10 @@ class Pair < Rank
     2
   end
 
-  def tie_breaking(other_pair)
-    @face <=> other_pair.face
-  end
-
   def without_kickers
     Pair.new(@face)
   end
-
-  protected
-  attr_reader :face
+  
+  include FaceTieBreaking
 
 end

@@ -34,7 +34,7 @@ class TwoPair < Rank
 
   def self.calculate_kickers(hand, pairs)
     kickers = hand.cards.reject{ |card| card.face == pairs[0] || card.face == pairs[1] }
-    [kickers.sort.reverse.first]
+    [kickers.max]
   end
 
 end
