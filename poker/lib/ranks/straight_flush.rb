@@ -17,7 +17,7 @@ class StraightFlush < Rank
   end
 
   def value
-    8000
+    8
   end
 
   def tie_breaking(other)

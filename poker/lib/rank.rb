@@ -12,12 +12,12 @@ class Rank
 
   def <=>(other)
     compare_rank = lambda {value <=> other.value}
-    tie_breaking_rules = lambda { tie_breaking(other)}
+    apply_tie_breaking_rules = lambda { tie_breaking(other)}
     compare_kickers = lambda { kickers_comparison(other)}
     
     in_order_to_decide_winner_rank(
             compare_rank,
-            tie_breaking_rules,
+            apply_tie_breaking_rules,
             compare_kickers)
   end
 

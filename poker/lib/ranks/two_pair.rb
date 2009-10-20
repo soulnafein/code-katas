@@ -4,12 +4,9 @@ class TwoPair < Rank
     super("Two Pair", kickers)
   end
 
-  def self.find_in hand
+  def self.find_in(hand)
     pairs = hand.tuples_with_length(2)
-    kickers = hand.cards.reject{ |card| card.face == pairs[0] || card.face == pairs[1] }
-    kickers = [kickers.sort.reverse.first]
-
-    TwoPair.new(Pair.new(pairs[0]), Pair.new(pairs[1]), kickers) if pairs[0] and pairs[1]
+    TwoPair.new(Pair.new(pairs[0]), Pair.new(pairs[1]), calculate_kickers(hand, pairs)) if pairs[0] and pairs[1]
   end
 
   def value
@@ -33,6 +30,11 @@ class TwoPair < Rank
     else
       top_pair_comparison
     end
+  end
+
+  def self.calculate_kickers(hand, pairs)
+    kickers = hand.cards.reject{ |card| card.face == pairs[0] || card.face == pairs[1] }
+    [kickers.sort.reverse.first]
   end
 
 end

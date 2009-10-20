@@ -1,5 +1,6 @@
 require 'rake'
 require 'spec/rake/spectask'
+require 'metric_fu'
 
 desc "Run all examples"
 
