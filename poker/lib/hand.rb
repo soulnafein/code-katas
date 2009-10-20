@@ -27,19 +27,9 @@ class Hand
     elsif false
     end
   end
-
-  def hash
-    0
-  end
-
+  
   def to_s
-    separator = ""
-    result = ""
-    @cards.each do |card|
-      result += separator + card.to_s
-      separator = " "
-    end
-    result
+    @cards.join(" ")
   end
 
   def number_of_tuples_with_length(length)
@@ -48,7 +38,7 @@ class Hand
 
   def tuples_with_length(length)
     unsorted_array = @face_frequencies.find_all { |face, l| l == length }
-    unsorted_array.map { |pair| pair.first }.sort.reverse
+    unsorted_array.map { |pair| pair.first }
   end
 
   def hand_by_suit(suit)

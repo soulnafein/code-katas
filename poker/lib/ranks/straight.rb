@@ -1,6 +1,6 @@
 class Straight < Rank
   def initialize(face)
-    super("Straight")
+    super("Straight", 5)
     @face = face
   end
 
@@ -9,10 +9,6 @@ class Straight < Rank
       has_straight = hand.contains_faces?(straight)
       return Straight.new(straight.first) if has_straight
     end
-  end
-
-  def value
-    4
   end
 
   include FaceTieBreaking

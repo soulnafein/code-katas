@@ -1,17 +1,12 @@
 class HighCard < Rank
   def initialize(face)
     @face = face
-    super("High Card")
+    super("High Card", 1)
   end
 
   def self.find_in(hand)
-    highest_card = hand.cards.sort.last
-    HighCard.new(highest_card.face)
+    HighCard.new(hand.cards.max.face)
   end 
-
-  def value
-    1  
-  end
 
   include FaceTieBreaking
 end

@@ -1,6 +1,6 @@
 class Fold < Rank
   def initialize
-    super("")
+    super("", 0)
   end
 
   def self.find_in(hand)
@@ -9,9 +9,5 @@ class Fold < Rank
 
   def ==(other)
     other.instance_of? Fold
-  end
-
-  def value
-    0
   end
 end

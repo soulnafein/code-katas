@@ -1,6 +1,6 @@
 class ThreeOfAKind < Rank
   def initialize(face, kickers = [])
-    super("Three of a Kind", kickers)
+    super("Three of a Kind", 4, kickers)
     @face = face
   end
 
@@ -10,20 +10,10 @@ class ThreeOfAKind < Rank
     ThreeOfAKind.new(three_of_a_kind, kickers) if not three_of_a_kind.nil?  
   end
 
+  include FaceTieBreaking
+
   def without_kickers
     ThreeOfAKind.new(@face)
   end
 
-   def value
-    3
-  end
-
-  protected
-    attr_reader :face
-   
-
-
-  def tie_breaking(other)
-    face_comparison = @face <=> other.face
-  end
 end

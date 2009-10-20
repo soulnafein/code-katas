@@ -1,7 +1,7 @@
 class Pair < Rank
   def initialize(face, kickers = [])
     @face = face
-    super("Pair", kickers)
+    super("Pair", 2, kickers)
   end
 
   def self.find_in hand
@@ -10,15 +10,11 @@ class Pair < Rank
 
     Pair.new(pair, kickers.sort.reverse[0..2]) if not pair.nil?
   end
-
-  def value
-    2
-  end
+  
+  include FaceTieBreaking
 
   def without_kickers
     Pair.new(@face)
   end
-  
-  include FaceTieBreaking
 
 end

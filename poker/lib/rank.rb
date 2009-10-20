@@ -1,26 +1,31 @@
 class Rank
-  def initialize(description, kickers = [])
+  def initialize(description, value, kickers = [])
     @description = description
+    @value = value
     @kickers = kickers
   end
-
-  def to_s
-    @description
-  end
-
+ 
   include Comparable
 
   def <=>(other)
     compare_rank = lambda {value <=> other.value}
-    apply_tie_breaking_rules = lambda { tie_breaking(other)}
-    compare_kickers = lambda { kickers_comparison(other)}
+    apply_tie_breaking_rules = lambda {tie_breaking(other)}
+    compare_kickers = lambda {kickers_comparison(other)}
 
     in_order_to_decide_winner_rank(
             compare_rank,
             apply_tie_breaking_rules,
             compare_kickers)
   end
+ 
+  def to_s
+    @description
+  end
 
+  protected
+  attr_reader :kickers, :value
+
+  private
   def in_order_to_decide_winner_rank(*predicates)
     predicates.each do |predicate|
       result = predicate.call
@@ -36,7 +41,7 @@ class Rank
   def kickers_comparison(other)
     faces = get_faces(@kickers)
     other_faces = get_faces(other.kickers)
-     
+
     top_card = get_max_unique_face(faces, other_faces)
     other_top_card = get_max_unique_face(other_faces, faces)
 
@@ -47,9 +52,6 @@ class Rank
     end
   end
 
-  attr_reader :kickers
-
-  private
   def get_faces(cards)
     cards.map { |card| card.face }
   end

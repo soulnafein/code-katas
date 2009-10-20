@@ -1,6 +1,6 @@
 class Poker < Rank
   def initialize(face)
-    super("Poker")
+    super("Poker", 8)
     @face = face
   end
 
@@ -10,8 +10,4 @@ class Poker < Rank
   end
 
   include FaceTieBreaking
-  
-  def value
-    7
-  end
 end

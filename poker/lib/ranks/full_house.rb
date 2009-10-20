@@ -1,6 +1,6 @@
 class FullHouse < Rank
   def initialize(three_of_a_kind, pair)
-    super("Full House")
+    super("Full House", 7)
     @three_of_a_kind = three_of_a_kind.without_kickers
     @pair = pair.without_kickers
   end
@@ -13,22 +13,13 @@ class FullHouse < Rank
     FullHouse.new(three_of_a_kind, pair) if has_full_house
   end
 
-  def ==(other)
-    three_of_a_kind == other.three_of_a_kind and
-    pair == other.pair
-  end
-
   def tie_breaking(other)
-    three_of_a_kind_comparison = three_of_a_kind <=> other.three_of_a_kind
+    three_of_a_kind_comparison = @three_of_a_kind <=> other.three_of_a_kind
     if three_of_a_kind_comparison == 0
-      pair <=> other.pair
+      @pair <=> other.pair
     else
       three_of_a_kind_comparison
     end
-  end
-
-  def value
-    6
   end
 
   protected

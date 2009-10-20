@@ -1,7 +1,6 @@
 class Flush < Rank
   def initialize(kickers)
-    super("Flush")
-    @kickers = kickers
+    super("Flush", 6, kickers)
   end
 
   def self.find_in(hand)
@@ -11,10 +10,6 @@ class Flush < Rank
       straight = cards_by_suit.sort.reverse[0..4] if cards_by_suit.length >= 5
     end
     Flush.new(straight) if has_flush
-  end
- 
-  def value
-    5
   end
 end
 

@@ -1,16 +1,12 @@
 class TwoPair < Rank
   def initialize(first_pair, second_pair, kickers = [])
     @pairs = [first_pair, second_pair].sort
-    super("Two Pair", kickers)
+    super("Two Pair", 3, kickers)
   end
 
   def self.find_in(hand)
     pairs = hand.tuples_with_length(2)
     TwoPair.new(Pair.new(pairs[0]), Pair.new(pairs[1]), calculate_kickers(hand, pairs)) if pairs[0] and pairs[1]
-  end
-
-  def value
-    3
   end
 
   protected

@@ -14,10 +14,6 @@ class Card
     end
   end
 
-  def hash
-    @suit + @face
-  end
-
   def to_s
     @face.to_s + @suit.to_s
   end

@@ -97,7 +97,7 @@ describe Hand do
     hand.number_of_tuples_with_length(3).should == 0
   end
 
-  it "should give me a descendent list of all faces that appear a certain number of times" do
+  it "should give me all the faces that appear a certain number of times" do
     hand = Hand.new("5h 7c Qc Kc 7d 5c 2d")
 
     hand.tuples_with_length(2).should == [Face::SEVEN, Face::FIVE]
