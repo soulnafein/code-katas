@@ -109,4 +109,10 @@ describe Hand do
     hand_of_clubs = hand.hand_by_suit(Suit::CLUBS)
     hand_of_clubs.should == Hand.new("7c Qc 5c Kc")
   end
+
+  it "should tell me if it contains the specified faces" do
+    hand = Hand.new("2h 3c 4c Kc 7d 5c 2d")
+    hand.contains_faces?([Face::SEVEN, Face::FOUR]).should == true
+    hand.contains_faces?([Face::SEVEN, Face::ACE]).should == false
+  end
 end

@@ -29,10 +29,9 @@ describe Face do
     lambda {Face.parse("10")}.should raise_error(UnknownFaceError)
   end
 
-  it "should allow me to iterate through all the faces sorted by value" do
-    Face.all_combinations_of_five.all? { |combo| combo.sort.reverse == combo }.should == true
-
-    firsts = Face.all_combinations_of_five.map { |combo| combo.first }    
-    firsts.sort.reverse.should == firsts
+  it "should give me a list of all the faces" do
+    all_faces = Face.all_faces
+    all_faces.length.should == 13
+    all_faces.sort.reverse.should == all_faces
   end
 end

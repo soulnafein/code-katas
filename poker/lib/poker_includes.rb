@@ -1,3 +1,4 @@
+require 'set'
 require 'lib/card.rb'
 require 'lib/hand.rb'
 require 'lib/poker_round.rb'

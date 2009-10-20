@@ -12,9 +12,7 @@ class Hand
 
   def rank
     return Fold.new if Fold.find_in(self)
-
     find_highest_rank
-
   end
 
   include Comparable
@@ -55,6 +53,11 @@ class Hand
 
   def hand_by_suit(suit)
     Hand.new(@cards.select { |card| card.suit == suit })
+  end
+
+  def contains_faces?(faces)
+    hand_faces = @cards.map { |card| card.face }.to_set
+    faces.to_set.subset?(hand_faces)
   end
 
   private
