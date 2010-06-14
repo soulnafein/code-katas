@@ -8,7 +8,7 @@ describe "When rolling" do
 
   it "should record my score for the current roll and current frame" do
     @game.roll(3)
-    @game.frames[0].rolls[0].score.should == 3
+    @game.frames[0].rolls[0].pins_down.should == 3
   end
 
   it "should change current frame every two rolls" do
@@ -17,7 +17,7 @@ describe "When rolling" do
     @game.roll(1)
 
     @game.current_frame.should == 2
-    @game.frames[1].rolls[0].score.should == 1
+    @game.frames[1].rolls[0].pins_down.should == 1
   end
 
   it "should move to the next frame if a strike is scored" do
@@ -27,12 +27,12 @@ describe "When rolling" do
 
   it "should raise an error when the sum of the rolls is more than 10" do
     @game.roll(3)
-    lambda { @game.roll(8) }.should raise_error ArgumentError
+    calling { @game.roll(8) }.should raise_error ArgumentError
   end
 
   it "should raise an error when an invalid pin number is passed" do
-    lambda { @game.roll(-9) }.should raise_error ArgumentError
-    lambda { @game.roll('boob') }.should raise_error ArgumentError
+    calling { @game.roll(-9) }.should raise_error ArgumentError
+    calling { @game.roll('boob') }.should raise_error ArgumentError
   end
 end
 
@@ -50,7 +50,7 @@ describe "When asking for the score" do
   it "should be the sum all the pins for a game without strikes or spares" do
     20.times {@game.roll(4)}
 
-    @game.score.should == 80  
+    @game.score.should == 80
   end
 
   it "should give bonus for a spare" do
@@ -69,14 +69,19 @@ describe "When asking for the score" do
   end
 
   it "should give bonus for strike" do
-    14.times {@game.roll(0)}
+    12.times {@game.roll(0)}
 
     @game.roll(3)
     @game.roll(1)
     @game.roll(10)
-    @game.roll(3)
+    @game.roll(10)
+    @game.roll(4)
     @game.roll(4)
 
-    @game.score.should == 28
+    @game.score.should == 54
   end
+end
+
+def calling(&block)
+  return block
 end

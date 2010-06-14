@@ -11,7 +11,7 @@ class Frame
 
     @rolls.push(Roll.new(pins))
 
-    @rolls << nil if pins == 10
+    @rolls << Roll.new(0) if pins == 10
 
     raise FrameFullNotification if @rolls.length == 2
   end
@@ -25,7 +25,15 @@ class Frame
   end
 
   def first_roll_pins_down
-    @rolls[0].score
+    @rolls[0].pins_down
+  end
+
+  def second_roll_pins_down
+    if strike?
+      @next_frame.first_roll_pins_down
+    else
+      @rolls[1].pins_down
+    end
   end
 
   private
@@ -37,12 +45,21 @@ class Frame
 
   def bonus
     bonus = 0
-    bonus += @next_frame.first_roll_pins_down if pins_down == 10
+    bonus += @next_frame.first_roll_pins_down if spare_or_strike?
+    bonus += @next_frame.second_roll_pins_down if strike?
     bonus
   end
 
+  def spare_or_strike?
+    pins_down == 10
+  end
+
   def pins_down
-    @rolls.inject(0) { |sum, roll| sum + roll.score }
+    @rolls.inject(0) { |sum, roll| sum + roll.pins_down }
+  end
+
+  def strike?
+   @rolls.first.pins_down == 10
   end
 end
 

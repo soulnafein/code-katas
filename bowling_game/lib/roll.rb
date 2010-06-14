@@ -3,7 +3,7 @@ class Roll
     @pins = pins
   end
 
-  def score
+  def pins_down
     @pins
   end
 end
