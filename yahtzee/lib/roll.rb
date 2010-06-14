@@ -3,7 +3,7 @@ class Roll
     @results = Hash.new(0)
 
     dice.each do |die|
-      @results[die.roll] += 1
+      @results[die.face_up] += 1
     end
   end
 

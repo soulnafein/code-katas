@@ -18,3 +18,5 @@ class Pair < Rank
   end
 
 end
+
+

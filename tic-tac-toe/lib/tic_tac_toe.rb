@@ -10,18 +10,28 @@ class TicTacToe
     TicTacToe.new
   end
 
+  def show_grid(grid)
+    puts grid.render
+  end
+
+  def display_message(message)
+    puts message
+  end
+
   def start
     grid = Grid.new
-    puts grid.render
+    show_grid(grid)
     while true do
       move = get_next_move
       grid.place_token(move)
-      puts grid.render
-      puts "#{@current_player} won!" if grid.has_winning_line?
-      puts "Draw!" if grid.full?
+      show_grid(grid)
+      display_message "#{@current_player} won!" if grid.has_winning_line?
+      display_message "Draw!" if grid.full?
       new_turn
     end
   end
+
+
 
   private
     def get_next_move

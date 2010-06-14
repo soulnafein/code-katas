@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 $:.unshift(File.dirname(__FILE__) + '/../lib')
-require 'dice'
-require 'roll'
+require 'yahtzee'
 
-dice = Dice.a_set_of 5
-roll = dice.roll
+yahtzee_game = Yahtzee.new_game
+yahtzee_game.start
 
-puts roll.display
+
+
 
 

@@ -15,7 +15,20 @@ class Grid
     not @cells.any? { |cell| cell == " "}
   end
 
+  def token_at(coordinate)
+    @cells[coordinate.to_i]
+  end
+
   def place_token(coordinate)
+
+    if @cells[coordinate.to_i] == nil
+      raise "coordinate overflow"
+    end
+    
+    if @cells[coordinate.to_i] != " "
+      raise "this space is already taken"
+    end
+    
     @cells[coordinate.to_i] = @current_token
     if @current_token == :X
       @current_token = :O

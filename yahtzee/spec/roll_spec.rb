@@ -1,6 +1,4 @@
-require "rspec"
-require "lib/roll.rb"
-require "lib/dice.rb"
+require "spec/spec_helper"
 
 describe Roll do
   before(:each) do
@@ -25,11 +23,5 @@ describe Roll do
                            "3 -> 2\n" +
                            "1 -> 3\n" +
                            "1 -> 5\n"
-  end
-
-  def mock_result_of_dice(dice, digits)
-    digits.each_with_index do |digit, index|
-      dice[index].should_receive(:roll).and_return(digit)
-    end
   end
 end

@@ -72,6 +72,7 @@ class Hand
     ]
 
     hand_ranks = poker_ranks.map { |class_name| class_name.find_in(self) }
-    hand_ranks.reject { |rank| rank.nil? }.max
+    hand_ranks.compact.max
   end
 end
+

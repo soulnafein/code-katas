@@ -1,5 +1,11 @@
 class Die
+  attr_reader :face_up
+  
+  def initialize
+    @face_up = 6
+  end
+
   def roll
-    1+rand(6)
+    @face_up = 1+rand(6)
   end
 end
