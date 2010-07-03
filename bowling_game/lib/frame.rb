@@ -11,7 +11,7 @@ class Frame
 
     @rolls.push(Roll.new(pins))
 
-    @rolls << Roll.new(0) if pins == 10
+    @rolls.push(Roll.new(0)) if pins == 10
 
     raise FrameFullNotification if @rolls.length == 2
   end
