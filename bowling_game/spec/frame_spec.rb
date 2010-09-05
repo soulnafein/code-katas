@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require_relative 'spec_helper'
 
 describe Frame do
   context "When calculating the score of a frame" do

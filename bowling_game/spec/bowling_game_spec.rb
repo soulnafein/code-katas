@@ -25,6 +25,11 @@ describe "Bowling score calculation" do
     @game.score.should == 63
   end
 
+  it "should give me two extra shot when I strike at the 10th frame" do
+    pins_rolled [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[10,2,3]]
+    @game.score.should == 15
+  end
+
   def pins_rolled(frames)
     frames.each do |frame|
       frame.each do |pins_down|
