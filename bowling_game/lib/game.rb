@@ -15,7 +15,7 @@ class Game
 
   private
   def create_frames
-    frames = Array.new(10) { Frame.new }
+    frames = Array.new(9) { Frame.new } + [TenthFrame.new]
     frames.each_cons(2) { |pair| pair[0].next_frame = pair[1] }
     frames
   end

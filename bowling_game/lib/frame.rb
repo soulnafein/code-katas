@@ -16,7 +16,11 @@ class Frame
   end
 
   def full?
-    @rolls.size >= 2 || strike?
+    @rolls.size >= max_number_of_rolls || strike?
+  end
+
+  def max_number_of_rolls
+    2
   end
 
   def first_pins_down
@@ -27,17 +31,18 @@ class Frame
     @rolls[1] || @next_frame.first_pins_down
   end
 
-  private
-  def sum_of_all_pins_down
-    @rolls.inject(&:+)
-  end
-
+  protected
   def spare?
     sum_of_all_pins_down == 10
   end
 
   def strike?
-    spare? && first_pins_down == 10
+    first_pins_down == 10
+  end
+
+  private
+  def sum_of_all_pins_down
+    @rolls.inject(&:+)
   end
 
   def spare_bonus
