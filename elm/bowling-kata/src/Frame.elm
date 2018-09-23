@@ -1,4 +1,4 @@
-module Frame exposing (Frame, score, complete)
+module Frame exposing (Frame, score, complete, addRoll)
 
 
 type alias Frame =
@@ -17,12 +17,20 @@ sumOfRolls frame =
 
 bonus : Frame -> List Frame -> Int
 bonus frame otherFrames =
-    if isStrike frame then
-        nextRolls 2 otherFrames
-    else if isSpare frame then
-        nextRolls 1 otherFrames
-    else
-        0
+    nextRolls (bonusRolls frame) otherFrames
+
+
+bonusRolls : Frame -> Int
+bonusRolls frame =
+    case scoreType frame of
+        Strike ->
+            2
+
+        Spare ->
+            1
+
+        Normal ->
+            0
 
 
 nextRolls : Int -> List Frame -> Int
@@ -35,48 +43,61 @@ nextRolls num frames =
 
 complete : Frame -> Int -> Bool
 complete frame index =
+    List.length frame == (frameLength frame index)
+
+
+frameLength : Frame -> Int -> Int
+frameLength frame index =
     case index of
         10 ->
-            lastFrameComplete frame
+            lastFrameLength frame
 
         _ ->
-            normalFrameComplete frame
+            normalFrameLength frame
 
 
-normalFrameComplete : Frame -> Bool
-normalFrameComplete frame =
-    let
-        frameLength =
-            if isStrike frame then
-                1
-            else
-                2
-    in
-        List.length frame == frameLength
+normalFrameLength : Frame -> Int
+normalFrameLength frame =
+    case scoreType frame of
+        Strike ->
+            1
+
+        _ ->
+            2
 
 
-lastFrameComplete : Frame -> Bool
-lastFrameComplete frame =
-    let
-        frameLength =
-            if (isStrike frame) || (isSpare frame) then
-                3
-            else
-                2
-    in
-        List.length frame == frameLength
+lastFrameLength : Frame -> Int
+lastFrameLength frame =
+    case scoreType frame of
+        Strike ->
+            3
+
+        Spare ->
+            3
+
+        Normal ->
+            2
 
 
-isStrike : Frame -> Bool
-isStrike frame =
+scoreType : Frame -> ScoreType
+scoreType frame =
     case frame of
         10 :: _ ->
-            True
+            Strike
 
         _ ->
-            False
+            if (sumOfRolls frame) >= 10 then
+                Spare
+            else
+                Normal
 
 
-isSpare : Frame -> Bool
-isSpare frame =
-    (sumOfRolls frame) >= 10
+addRoll : Int -> Frame -> Frame
+addRoll roll frame =
+    frame ++ [ roll ]
+
+
+type ScoreType
+    = Normal
+    | Spare
+    | Strike

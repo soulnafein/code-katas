@@ -10,15 +10,15 @@ score rolls =
 
 
 splitInFrames : List Int -> Frame -> Int -> List Frame
-splitInFrames rolls currentFrame index =
+splitInFrames rolls frame index =
     case rolls of
         roll :: otherRolls ->
             let
                 updatedFrame =
-                    currentFrame ++ [ roll ]
+                    Frame.addRoll roll frame
             in
                 if Frame.complete updatedFrame index then
-                    [ updatedFrame ] ++ (splitInFrames otherRolls [] (index + 1))
+                    updatedFrame :: (splitInFrames otherRolls [] (index + 1))
                 else
                     splitInFrames otherRolls updatedFrame index
 
