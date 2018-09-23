@@ -1,4 +1,4 @@
-module Example exposing (..)
+module GameTests exposing (suite, allTests)
 
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
@@ -48,9 +48,22 @@ suite =
     describe "Game.score" allTests
 
 
+allTests : List Test
 allTests =
-    List.map testExample examples
+    (List.map testExample examples)
+        ++ [ test "correct split"
+                (\_ ->
+                    let
+                        input =
+                            (List.repeat 18 0) ++ [ 2, 8, 10 ]
+
+                        expectedResult =
+                            [ [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 2, 8, 10 ] ]
+                    in
+                        Expect.equal expectedResult (Game.splitInFrames input [] 1)
+                )
+           ]
 
 
 testExample ( testDescription, input, expectedOutput ) =
-    test testDescription (\_ -> Expect.equal (score input) expectedOutput)
+    test testDescription (\_ -> Expect.equal expectedOutput (score input))
