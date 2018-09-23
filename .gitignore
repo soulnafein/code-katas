@@ -8,3 +8,6 @@ db/*.sqlite3
 **/coverage.data
 **/coverage/**
 .DS_Store
+node_modules
+_build
+elm-stuff
