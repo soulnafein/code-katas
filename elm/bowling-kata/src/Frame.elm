@@ -1,8 +1,27 @@
-module Frame exposing (Frame, score, complete, addRoll)
+module Frame exposing (Frame, score, complete, addRoll, create, createTenth)
 
 
 type alias Frame =
-    List Int
+    { rolls : List Int
+    , frameType : FrameType
+    }
+
+
+type FrameType
+    = Standard
+    | Tenth
+
+
+create : Frame
+create =
+    { rolls = []
+    , frameType = Standard
+    }
+
+
+createTenth : Frame
+createTenth =
+    { create | frameType = Tenth }
 
 
 score : Frame -> List Frame -> Int
@@ -12,7 +31,7 @@ score frame otherFrames =
 
 sumOfRolls : Frame -> Int
 sumOfRolls frame =
-    List.sum frame
+    List.sum frame.rolls
 
 
 bonus : Frame -> List Frame -> Int
@@ -36,21 +55,22 @@ bonusRolls frame =
 nextRolls : Int -> List Frame -> Int
 nextRolls num frames =
     frames
+        |> List.map .rolls
         |> List.concat
         |> List.take num
         |> List.sum
 
 
-complete : Frame -> Int -> Bool
-complete frame index =
-    List.length frame == (frameLength frame index)
+complete : Frame -> Bool
+complete frame =
+    List.length frame.rolls == (frameLength frame)
 
 
-frameLength : Frame -> Int -> Int
-frameLength frame index =
-    case index of
-        10 ->
-            lastFrameLength frame
+frameLength : Frame -> Int
+frameLength frame =
+    case frame.frameType of
+        Tenth ->
+            tenthFrameLength frame
 
         _ ->
             normalFrameLength frame
@@ -66,8 +86,8 @@ normalFrameLength frame =
             2
 
 
-lastFrameLength : Frame -> Int
-lastFrameLength frame =
+tenthFrameLength : Frame -> Int
+tenthFrameLength frame =
     case scoreType frame of
         Strike ->
             3
@@ -81,20 +101,22 @@ lastFrameLength frame =
 
 scoreType : Frame -> ScoreType
 scoreType frame =
-    case frame of
-        10 :: _ ->
-            Strike
-
-        _ ->
-            if (sumOfRolls frame) >= 10 then
-                Spare
-            else
-                Normal
+    if (firstRoll frame) == Just 10 then
+        Strike
+    else if (sumOfRolls frame) >= 10 then
+        Spare
+    else
+        Normal
 
 
 addRoll : Int -> Frame -> Frame
 addRoll roll frame =
-    frame ++ [ roll ]
+    { frame | rolls = frame.rolls ++ [ roll ] }
+
+
+firstRoll : Frame -> Maybe Int
+firstRoll frame =
+    List.head frame.rolls
 
 
 type ScoreType

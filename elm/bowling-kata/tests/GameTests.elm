@@ -50,19 +50,7 @@ suite =
 
 allTests : List Test
 allTests =
-    (List.map testExample examples)
-        ++ [ test "correct split"
-                (\_ ->
-                    let
-                        input =
-                            (List.repeat 18 0) ++ [ 2, 8, 10 ]
-
-                        expectedResult =
-                            [ [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 0, 0 ], [ 2, 8, 10 ] ]
-                    in
-                        Expect.equal expectedResult (Game.splitInFrames input [] 1)
-                )
-           ]
+    List.map testExample examples
 
 
 testExample ( testDescription, input, expectedOutput ) =
